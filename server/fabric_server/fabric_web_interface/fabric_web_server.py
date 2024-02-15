@@ -29,7 +29,7 @@ def send_request(prompt, endpoint):
         KeyError: If the response JSON does not contain the expected "response" key.
     """
 
-    base_url = "http://3.19.215.14:13337"
+    base_url = "http://fabric-server:13337"
     url = f"{base_url}{endpoint}"
  
     #
