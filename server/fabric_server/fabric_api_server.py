@@ -8,7 +8,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from importlib import resources
-from .fabric_web_interface import main as web_interface
+from fabric_server.fabric_web_interface import main as web_interface
 
 app = Flask(__name__)
 
@@ -261,7 +261,7 @@ def login():
 
 def main():
     """Runs the main fabric API backend server"""
-    app.run(host="127.0.0.1", port=13337, debug=True)
+    app.run(host="0.0.0.0", port=13337, debug=True)
 
 
 def run_web_interface():
