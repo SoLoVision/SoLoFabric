@@ -17,7 +17,7 @@
             <h1 class="text-4xl font-bold"><code>fabric</code></h1>
 
         </div>
-        <p>Please enter your content and select the API you want to use:</p>
+        <p>Yo, SoLo! Enter your content and the API you want to send it to.</p>
         <br />
         <form method="POST" class="space-y-4">
             <div>
@@ -28,16 +28,22 @@
                 <label for="api" class="block text-sm font-medium">API:</label>
                 <select id="api" name="api" class="w-full px-3 py-2 border border-gray-300 rounded-md text-black">
                     <option value="/extwis">/extwis</option>
+             
+                    <option value="create_aphorisms">Create Aphorisms ~ create_aphorisms</option>
+                    <option value="/extvidid">Extract Video ID ~ /extvidid</option>
+         
                     <!-- Add more API endpoints here... -->
                 </select>
             </div>
-            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium">Send Request</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium">Submit</button>
         </form>
+
+
         {% if response %}
         <div class="mt-8">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold">API Response:</h2>
-                <button id="copy-button" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Copy to Clipboard</button>
+                <h2 class="text-2xl font-bold">Response:</h2>
+                <button id="copy-button" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Copy</button>
             </div>
             <pre id="response-output" class="bg-gray-800 p-4 rounded-md whitespace-pre-wrap">{{ response }}</pre>
         </div>

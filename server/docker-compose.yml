@@ -5,7 +5,8 @@ services:
     build: .
     ports:
       - "13337:13337"
-    command: gunicorn -w 4 -b 0.0.0.0:13337 entry:api_app
+    command: python fabric_server/fabric_api_server.py #gunicorn -w 4 -b 0.0.0.0:13337 entry:api_app
+    restart: always
     volumes:
       - .:/app
 
@@ -14,7 +15,8 @@ services:
     build: .
     ports:
       - "13338:13338"
-    command: gunicorn -w 4 -b 0.0.0.0:13338 entry:web_app
+    command: python fabric_server/fabric_web_interface/fabric_web_server.py #gunicorn -w 4 -b 0.0.0.0:13338 entry:web_app
+    restart: always
     volumes:
       - .:/app
 
