@@ -29,9 +29,9 @@ def send_request(prompt, endpoint):
         KeyError: If the response JSON does not contain the expected "response" key.
     """
 
-    base_url = "http://fabric-server:13337"
+    base_url = "http://3.19.215.14:13337"
     url = f"{base_url}{endpoint}"
-    print(url)
+ 
     #
     token = "eJ4f1e0b-25wO-47f9-97ec-6b5335b2" 
     headers = {

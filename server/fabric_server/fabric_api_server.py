@@ -292,7 +292,7 @@ def extwis():
             presence_penalty=0.1,
         )
         assistant_message = response.choices[0].message.content
-        print(assistant_message)
+ 
         return jsonify({"response": assistant_message})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
