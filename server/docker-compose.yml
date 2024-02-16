@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - "13337:13337"
-    command: gunicorn -w 4 -b 0.0.0.0:13337 --reload -t 600 entry:api_app
+    command: gunicorn -w 2 -b 0.0.0.0:13337 --reload -t 600 entry:api_app
     restart: always
     volumes:
       - .:/app
@@ -15,7 +15,7 @@ services:
     build: .
     ports:
       - "13338:13338"
-    command: gunicorn -w 4 -b 0.0.0.0:13338 --reload -t 600 entry:web_app
+    command: gunicorn -w 2 -b 0.0.0.0:13338 --reload -t 600 entry:web_app
     restart: always
     volumes:
       - .:/app
