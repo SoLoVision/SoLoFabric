@@ -6,6 +6,7 @@ on:
     branches:
       - new
       - new-2
+      - main
 
 jobs:
   deploy:
