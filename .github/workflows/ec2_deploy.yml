@@ -1,26 +1,33 @@
-name: Run Command on EC2
+name: Push-to-EC2
 
+# Trigger deployment only on push to master branch
 on:
   push:
     branches:
       - new-2
 
 jobs:
-  run-command:
-    name: Run Command on EC2
+  deploy:
+    name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Install SSH
-        run: sudo apt-get update && sudo apt-get install -y openssh-client
-
-      - name: Run command on EC2
-        run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd {{secrets.TARGET}} && git stash && git pull && docker restart server_nginx_1'
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.TARGET }}
+
+      - name: Restart Nginx Container
+
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'docker restart server_nginx_1'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
