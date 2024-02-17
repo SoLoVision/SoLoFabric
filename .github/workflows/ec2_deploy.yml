@@ -3,7 +3,7 @@ name: Run Command on EC2
 on:
   push:
     branches:
-      - main
+      - new-2
 
 jobs:
   run-command:
