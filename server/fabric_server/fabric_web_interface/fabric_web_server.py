@@ -29,14 +29,18 @@ def send_request(prompt, endpoint):
         KeyError: If the response JSON does not contain the expected "response" key.
     """
 
-    base_url = "http://127.0.0.1:13337"
+    base_url = "http://fabric-server:13337"
     url = f"{base_url}{endpoint}"
+ 
+    #
+    token = "eJ4f1e0b-25wO-47f9-97ec-6b5335b2" 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {session['token']}",
+        "Authorization": f"Bearer {token}",
     }
     data = json.dumps({"input": prompt})
     response = requests.post(url, headers=headers, data=data, verify=False)
+
 
     try:
         response = requests.post(url, headers=headers, data=data)
@@ -45,6 +49,7 @@ def send_request(prompt, endpoint):
         return "Error: Unable to connect to the server."
     except requests.HTTPError as e:
         return f"Error: An HTTP error occurred: {str(e)}"
+    return response.json()["response"]
 
 
 
@@ -87,7 +92,7 @@ def index():
 
 
 def main():
-    app.run(host="127.0.0.1", port=13338, debug=True)
+    app.run(host="0.0.0.0", port=13338, debug=True)
 
 
 if __name__ == "__main__":

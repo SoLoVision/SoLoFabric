@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  fabric-server:
+    build: .
+    ports:
+      - "13337:13337"
+    command: gunicorn -w 2 -b 0.0.0.0:13337 --reload -t 600 entry:api_app
+    restart: always
+    volumes:
+      - .:/app
+
+
+  fabric-webui:
+    build: .
+    ports:
+      - "13338:13338"
+    command: gunicorn -w 2 -b 0.0.0.0:13338 --reload -t 600 entry:web_app
+    restart: always
+    volumes:
+      - .:/app
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
