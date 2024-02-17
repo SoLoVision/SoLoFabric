@@ -4,7 +4,7 @@ name: Push-to-EC2
 on:
   push:
     branches:
-      - new
+      - new-2
 
 jobs:
   deploy:
@@ -22,3 +22,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.TARGET }}
+
+      - name: Restart Nginx Container
+        run: |
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'docker restart server_nginx_1'
